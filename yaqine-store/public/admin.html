@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Yaqine Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0D0B09;--gold:#D4A63A;--gold2:#F0C75E;--bronze:#8B5A1B;--ivory:#F5E6C8;--blush:#E8908A}
+*{box-sizing:border-box;margin:0}
+body{font-family:Jost,system-ui,sans-serif;background:#FFF9EE;color:#1A1410;min-height:100vh}
+.logo{font:700 1.5rem 'Cormorant Garamond',serif;color:var(--gold);letter-spacing:.08em}
+header{background:var(--black);border-bottom:2px solid var(--gold);padding:.8rem 5vw;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+header a{color:var(--ivory);text-decoration:none;margin-right:1rem;font-size:.95rem}
+.btn{border:0;border-radius:999px;padding:.7em 1.5em;font:500 1rem Jost,sans-serif;cursor:pointer;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--black);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(212,166,58,.4)}
+.btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.sm{padding:.4em 1em;font-size:.85rem}
+.btn.dark{background:var(--black);color:var(--gold2)}
+.btn.red{background:var(--blush)}
+.btn.out{background:transparent;border:1.5px solid var(--gold);color:var(--ivory)}
+.tabs{display:flex;gap:.5rem;overflow-x:auto;padding:1rem 4vw 0;max-width:1000px;margin:auto;scrollbar-width:none}
+.tabs button{flex:none;border:1.5px solid var(--gold);background:transparent;color:var(--bronze);border-radius:999px;padding:.5em 1.3em;font:500 .95rem Jost;cursor:pointer;transition:all .25s}
+.tabs button.on{background:var(--black);color:var(--gold2);border-color:var(--black)}
+main{max-width:1000px;margin:auto;padding:1.2rem 4vw 4rem;display:grid;gap:1.5rem}
+section{display:grid;gap:1.5rem;animation:in .35s both}
+.box{background:#fff;border:1px solid rgba(212,166,58,.45);border-radius:22px;padding:1.4rem}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+h2{font:600 1.7rem 'Cormorant Garamond',serif;margin-bottom:.6rem}
+.note{font-size:.9rem;color:var(--bronze);margin-bottom:.4rem}
+label{display:block;font-size:.9rem;color:var(--bronze);margin:.8rem 0 .25rem}
+input,select,textarea{width:100%;border:1.5px solid #e2cf9f;border-radius:14px;padding:.7em 1em;font:inherit;background:#FFFCF5;transition:border .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,166,58,.25)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.drop{display:flex;gap:1rem;align-items:center;border:2px dashed var(--gold);border-radius:18px;padding:.9rem;cursor:pointer;background:var(--ivory);transition:background .2s}
+.drop:hover{background:#f0dcb0}
+.drop img{width:84px;height:84px;border-radius:14px;object-fit:cover;background:#fff;display:none}
+.drop span{font-size:.9rem;color:var(--bronze)}
+.drop input{display:none}
+.check{display:flex;gap:.6rem;align-items:center;margin-top:1rem}
+.check input{width:auto}
+.actions{display:flex;gap:.7rem;margin-top:1.2rem;flex-wrap:wrap}
+.item{display:flex;gap:.8rem;align-items:center;padding:.8rem 0;border-top:1px solid #f0e3c4}
+.item:first-of-type{border-top:0}
+.item img{width:64px;height:64px;border-radius:14px;object-fit:cover}
+.item .t{flex:1;min-width:0}
+.item b{display:block;overflow:hidden;text-overflow:ellipsis}
+.item small{color:var(--bronze)}
+.item select{width:auto;padding:.4em .8em;font-size:.9rem}
+.item a{color:var(--bronze)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+.stat{background:var(--black);color:var(--ivory);border-radius:20px;padding:1rem 1.2rem;border:1px solid var(--gold)}
+.stat small{color:var(--gold2)}
+.stat b{display:block;font:600 1.9rem 'Cormorant Garamond',serif;color:#fff}
+.stat.l{background:var(--ivory);color:#1A1410;border-color:var(--gold)}.stat.l b{color:var(--bronze)}.stat.l small{color:var(--bronze)}
+.bars{display:flex;align-items:flex-end;gap:5px;height:130px;margin-top:1rem}
+.bars div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:.65rem;color:var(--bronze);gap:3px}
+.bars i{display:block;width:100%;background:linear-gradient(var(--gold2),var(--gold));border-radius:8px 8px 3px 3px;min-height:3px;transition:height .6s}
+.login{max-width:380px;margin:18vh auto;text-align:center}
+#toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,90px);background:var(--black);color:var(--gold2);padding:.7em 1.4em;border-radius:999px;transition:transform .35s;z-index:9}
+#toast.show{transform:translate(-50%,0)}
+.hide{display:none!important}
+@media(max-width:560px){.two{grid-template-columns:1fr}.item{flex-wrap:wrap}.item .t{flex-basis:calc(100% - 80px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="login" class="box login hide">
+  <div class="logo" style="color:var(--bronze)">YAQINE</div>
+  <h2 style="margin:.4rem 0 1rem">Admin login</h2>
+  <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
+  <div class="actions" style="justify-content:center"><button class="btn" id="go">Log in</button></div>
+</div>
+
+<div id="app" class="hide">
+<header><div class="logo">YAQINE <span style="font:400 .8rem Jost;color:var(--ivory)">Admin</span></div>
+  <div><a href="/" target="_blank">View shop</a><button class="btn sm out" id="out">Log out</button></div></header>
+<nav class="tabs" id="tabs"><button data-t="products" class="on">Products</button><button data-t="orders">Orders</button><button data-t="analytics">Analytics</button><button data-t="marketing">Marketing</button><button data-t="settings">Settings</button></nav>
+<main>
+
+<section id="t-products">
+  <form class="box" id="form">
+    <h2 id="ftitle">Add a product</h2>
+    <label class="drop"><img id="prev" alt=""><span id="hint"></span><input type="file" id="img" accept="image/*"></label>
+    <label>Name</label><input id="name" required maxlength="80">
+    <div class="two"><div><label>Price (DA)</label><input id="price" type="number" min="0" required inputmode="numeric"></div>
+    <div><label>Category</label><select id="cat"><option>Homme</option><option>Femme</option><option>Coffrets</option></select></div></div>
+    <div class="two"><div><label>Size</label><select id="size"></select></div>
+    <div id="size2w" class="hide"><label>Type the size</label><input id="size2" maxlength="30" placeholder="e.g. 3 x 10 ml or 250"></div></div>
+    <label>Description</label><textarea id="desc" rows="3" maxlength="400"></textarea>
+    <label class="check"><input type="checkbox" id="sold"> Mark as sold out</label>
+    <div class="actions"><button class="btn" id="save">Save product</button><button type="button" class="btn dark hide" id="cancel">Cancel</button></div>
+    <p class="note" style="margin-top:.8rem">Changes appear on the shop within 15 seconds.</p>
+  </form>
+  <div class="box"><h2>Products <small id="count" style="font:400 .9rem Jost;color:var(--bronze)"></small></h2><div id="list"></div></div>
+</section>
+
+<section id="t-orders" class="hide"><div class="box"><h2>Orders</h2><p class="note">Set an order to “Delivered” once it is paid. Only delivered orders count as earnings.</p><div id="olist"></div></div></section>
+
+<section id="t-analytics" class="hide">
+  <div class="tabs" style="padding:0" id="rng"><button data-r="1">Today</button><button data-r="7" class="on">7 days</button><button data-r="30">30 days</button></div>
+  <div class="stats" id="stats"></div>
+  <div class="box"><h2>Visitors, last 14 days</h2><div class="bars" id="bars"></div></div>
+  <div class="box"><h2>Best sellers, last 30 days</h2><div id="top"></div></div>
+</section>
+
+<section id="t-marketing" class="hide"><div class="box" data-set>
+  <h2>Marketing pixels</h2><p class="note">Paste only the Pixel ID (not the full code). Leave empty to turn a pixel off.</p>
+  <label>Facebook Pixel ID</label><input data-k="fb_pixel" inputmode="numeric" placeholder="123456789012345">
+  <label>TikTok Pixel ID</label><input data-k="tiktok_pixel" placeholder="C1234567890ABCDEFGHI">
+  <p class="note" style="margin-top:1rem">Events sent: page view, checkout opened, and purchase (with the order value in DZD).</p>
+  <div class="actions"><button class="btn" data-save>Save marketing</button></div>
+</div></section>
+
+<section id="t-settings" class="hide">
+  <div class="box" data-set><h2>Contact information</h2>
+    <label>WhatsApp number (with country code, e.g. 213550123456)</label><input data-k="whatsapp" inputmode="numeric">
+    <label>Phone</label><input data-k="phone" inputmode="tel">
+    <label>Email</label><input data-k="email" type="email">
+    <label>Address</label><input data-k="address">
+    <label>Opening hours</label><input data-k="hours" placeholder="Sam–Jeu, 10h–19h">
+    <div class="actions"><button class="btn" data-save>Save contact</button></div></div>
+  <div class="box" data-set><h2>Social media links</h2>
+    <label>Facebook</label><input data-k="facebook" placeholder="https://facebook.com/yourpage">
+    <label>Instagram</label><input data-k="instagram" placeholder="https://instagram.com/yourpage">
+    <label>TikTok</label><input data-k="tiktok" placeholder="https://tiktok.com/@yourpage">
+    <label>YouTube</label><input data-k="youtube">
+    <div class="actions"><button class="btn" data-save>Save links</button></div></div>
+  <div class="box"><h2>Telegram order alerts</h2><p class="note">You get a Telegram message for every new order. Setup is done once in Cloudflare (see README). Use the button to check it works.</p>
+    <div class="actions"><button class="btn dark" id="tgtest">Send test message</button></div></div>
+</section>
+</main></div>
+<div id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let products=[],editId=null,rng=7,stats=null;
+const SIZES=[5,10,15,20,30,50,75,100,125,150],HINT='Tap to choose a photo. It is cropped to a square and converted to 1200×1200 WebP automatically.';
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DA=n=>Number(n||0).toLocaleString('fr-DZ')+' DA';
+async function api(url,opt){const r=await fetch(url,opt);const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Something went wrong');return j}
+const jpost=(m,b)=>({method:m,headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+$('#size').innerHTML=SIZES.map(s=>`<option>${s} ml</option>`).join('')+'<option value="_">Other (type it)</option>';
+$('#size').value='50 ml';$('#hint').textContent=HINT;
+$('#size').onchange=()=>$('#size2w').classList.toggle('hide',$('#size').value!=='_');
+
+async function init(){try{await api('/api/me');show(true)}catch{show(false)}}
+function show(ok){$('#login').classList.toggle('hide',ok);$('#app').classList.toggle('hide',!ok);if(ok)load()}
+$('#go').onclick=async()=>{try{await api('/api/login',jpost('POST',{password:$('#pw').value}));show(true)}catch(e){toast(e.message)}};
+$('#pw').onkeydown=e=>e.key==='Enter'&&$('#go').click();
+$('#out').onclick=async()=>{await api('/api/logout',{method:'POST'});show(false)};
+
+$('#tabs').onclick=e=>{const t=e.target.dataset.t;if(!t)return;
+  $$('#tabs button').forEach(b=>b.classList.toggle('on',b===e.target));
+  $$('main>section').forEach(s=>s.classList.toggle('hide',s.id!=='t-'+t));
+  ({products:load,orders:loadOrders,analytics:loadStats,marketing:loadSet,settings:loadSet})[t]()};
+
+// ---- products
+async function load(){products=await api('/api/products');
+  $('#count').textContent=`(${products.length})`;
+  $('#list').innerHTML=products.length?products.map(p=>`<div class="item"><img src="/uploads/${p.image}" alt=""><div class="t"><b>${esc(p.name)}</b><small>${DA(p.price)} · ${esc(p.size)} · ${p.category}${p.soldOut?' · Sold out':''}</small></div>
+   <button class="btn sm dark" data-e="${p.id}">Edit</button><button class="btn sm red" data-d="${p.id}">Delete</button></div>`).join(''):'<p class="note">No products yet. Add your first one above.</p>'}
+$('#img').onchange=e=>{const f=e.target.files[0];if(!f)return;const p=$('#prev');p.src=URL.createObjectURL(f);p.style.display='block';$('#hint').textContent=f.name};
+function reset(){editId=null;$('#form').reset();$('#size').value='50 ml';$('#size2w').classList.add('hide');$('#prev').style.display='none';$('#hint').textContent=HINT;$('#ftitle').textContent='Add a product';$('#cancel').classList.add('hide')}
+$('#cancel').onclick=reset;
+$('#list').onclick=async e=>{
+  const ed=e.target.dataset.e,del=e.target.dataset.d;
+  if(ed){const p=products.find(x=>x.id===ed);editId=ed;$('#name').value=p.name;$('#price').value=p.price;$('#cat').value=p.category;$('#desc').value=p.description;$('#sold').checked=p.soldOut;
+    const known=SIZES.map(s=>s+' ml').includes(p.size);$('#size').value=known?p.size:'_';$('#size2').value=known?'':p.size;$('#size2w').classList.toggle('hide',known);
+    $('#prev').src='/uploads/'+p.image;$('#prev').style.display='block';$('#hint').textContent='Choose a new photo to replace this one (optional).';
+    $('#ftitle').textContent='Edit product';$('#cancel').classList.remove('hide');scrollTo({top:0,behavior:'smooth'})}
+  if(del&&confirm('Delete this product?')){await api('/api/admin/products/'+del,{method:'DELETE'});toast('Deleted');load()}
+};
+// Crop to a centred square, resize to 1200x1200 and export high-quality WebP (in the browser)
+async function toWebp(file){const bmp=await createImageBitmap(file,{imageOrientation:'from-image'});const c=document.createElement('canvas');c.width=c.height=1200;const x=c.getContext('2d');x.imageSmoothingQuality='high';const n=Math.min(bmp.width,bmp.height);x.drawImage(bmp,(bmp.width-n)/2,(bmp.height-n)/2,n,n,0,0,1200,1200);return new Promise((r,j)=>c.toBlob(b=>b?r(b):j(new Error('Could not read that image')),'image/webp',0.9))}
+$('#form').onsubmit=async e=>{e.preventDefault();
+  const fd=new FormData();fd.append('name',$('#name').value);fd.append('price',$('#price').value);fd.append('category',$('#cat').value);fd.append('description',$('#desc').value);fd.append('soldOut',$('#sold').checked);
+  fd.append('size',$('#size').value==='_'?$('#size2').value:$('#size').value);
+  const b=$('#save');b.disabled=true;b.textContent='Saving…';
+  try{if($('#img').files[0])fd.append('image',await toWebp($('#img').files[0]),'p.webp');
+    await api(editId?'/api/admin/products/'+editId:'/api/admin/products',{method:editId?'PUT':'POST',body:fd});toast('Saved');reset();load()}
+  catch(err){toast(err.message)}b.disabled=false;b.textContent='Save product'};
+
+// ---- orders
+const ST=['new','confirmed','delivered','canceled'];
+async function loadOrders(){const o=await api('/api/admin/orders');
+  $('#olist').innerHTML=o.length?o.map(x=>`<div class="item"><div class="t"><b>${esc(x.name)} · <a href="tel:${esc(x.phone)}">${esc(x.phone)}</a></b><small>${esc(x.product_name)} ${esc(x.size)} × ${x.qty} = ${DA(x.price*x.qty)}<br>${esc(x.wilaya)} · ${x.day}</small></div>
+   <select data-s="${x.id}">${ST.map(s=>`<option ${s===x.status?'selected':''}>${s}</option>`).join('')}</select><button class="btn sm red" data-x="${x.id}">Delete</button></div>`).join(''):'<p class="note">No orders yet.</p>'}
+$('#olist').onchange=async e=>{const id=e.target.dataset.s;if(id){await api('/api/admin/orders/'+id,jpost('PUT',{status:e.target.value}));toast('Order updated')}};
+$('#olist').onclick=async e=>{const id=e.target.dataset.x;if(id&&confirm('Delete this order?')){await api('/api/admin/orders/'+id,{method:'DELETE'});loadOrders()}};
+
+// ---- analytics
+async function loadStats(){stats=await api('/api/admin/stats');drawStats()}
+function drawStats(){if(!stats)return;const r=stats.ranges[rng],conv=r.v?(r.n/r.v*100).toFixed(1):'0';
+  $('#stats').innerHTML=`<div class="stat"><small>Visitors</small><b>${r.v}</b></div><div class="stat"><small>Page views</small><b>${r.views}</b></div><div class="stat"><small>Orders</small><b>${r.n}</b></div>
+  <div class="stat l"><small>Earnings (delivered)</small><b>${DA(r.earn)}</b></div><div class="stat l"><small>Pending orders value</small><b>${DA(r.pend)}</b></div><div class="stat"><small>Conversion</small><b>${conv}%</b></div>`;
+  const max=Math.max(1,...stats.daily.map(d=>d.v));
+  $('#bars').innerHTML=stats.daily.map(d=>`<div title="${d.day}: ${d.v}">${d.v}<i style="height:${d.v/max*85}%"></i>${d.day.slice(8)}</div>`).join('');
+  $('#top').innerHTML=stats.top.length?stats.top.map(t=>`<div class="item"><div class="t"><b>${esc(t.name)}</b></div><small>${t.n} sold</small></div>`).join(''):'<p class="note">No sales yet.</p>'}
+$('#rng').onclick=e=>{const r=e.target.dataset.r;if(!r)return;rng=+r;$$('#rng button').forEach(b=>b.classList.toggle('on',b===e.target));drawStats()};
+
+// ---- marketing + settings
+async function loadSet(){const s=await api('/api/admin/settings');$$('[data-k]').forEach(i=>i.value=s[i.dataset.k]||'')}
+$$('[data-save]').forEach(b=>b.onclick=async()=>{const body={};b.closest('[data-set]').querySelectorAll('[data-k]').forEach(i=>body[i.dataset.k]=i.value);
+  try{await api('/api/admin/settings',jpost('PUT',body));toast('Saved — live within 15 seconds')}catch(e){toast(e.message)}});
+$('#tgtest').onclick=async()=>{try{await api('/api/admin/telegram-test',{method:'POST'});toast('Test sent. Check Telegram')}catch(e){toast(e.message)}};
+init();
+</script>
+</body>
+</html>
