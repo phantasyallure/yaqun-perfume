@@ -133,7 +133,6 @@ footer p{opacity:.7;font-size:.85rem}
 
 <footer>
   <div class="logo">YAQUINE<small>BOUTIQUE</small></div>
-  <div class="socs" id="soc2"></div>
   <div class="fl"><a href="#shop" data-i="n_shop"></a><a href="#about" data-i="n_about"></a><a href="#contact" data-i="n_contact"></a></div>
   <p>© <span id="y"></span> <span data-i="f_copy"></span></p>
 </footer>
@@ -188,7 +187,7 @@ function contact(){
   if(S.hours)cards.push(`<div class="cc"><div class="ic">${IC.clk}</div><b>${t('k_hours')}</b><span>${esc(S.hours)}</span></div>`);
   $('#cgrid').innerHTML=cards.join('');
   const soc=[['instagram','Instagram',IC.ig],['facebook','Facebook',IC.fb],['tiktok','TikTok',IC.tt],['youtube','YouTube',IC.yt]].filter(x=>link(x[0])).map(x=>`<a href="${esc(link(x[0]))}" target="_blank" rel="noopener noreferrer" aria-label="${x[1]}" title="${x[1]}">${x[2]}</a>`).join('');
-  $('#soc').innerHTML=soc;$('#soc2').innerHTML=soc;
+  $('#soc').innerHTML=soc;
   const n=$('#wa-nav');if(S.whatsapp){n.href=wa('Bonjour, je voudrais des informations.');n.target='_blank';n.rel='noopener'}else n.style.display='none';
 }
 function render(){
