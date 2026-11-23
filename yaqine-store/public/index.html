@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+<title>Boutique Yaquine — Parfums</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--black:#16120F;--gold:#C9AD7A;--gold2:#E6D5AE;--bronze:#8A6D3F;--ivory:#F3EBDC;--blush:#E9B8B0;--ink:#2A221B;--bg:#FBF7F0}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+h1,h2,h3,.logo{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+html[lang=ar] body,html[lang=ar] h1,html[lang=ar] h2,html[lang=ar] h3,html[lang=ar] .logo,html[lang=ar] .price,html[lang=ar] .tot,html[lang=ar] .btn,html[lang=ar] .chip,html[lang=ar] input,html[lang=ar] select{font-family:Cairo,system-ui,sans-serif}
+html[lang=ar] h1{line-height:1.35}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:0;border-radius:999px;padding:.75em 1.6em;font:500 .95rem Manrope,sans-serif;cursor:pointer;text-decoration:none;background:linear-gradient(135deg,#E3D2AA,#C9AD7A);color:#2A1F12;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(150,120,70,.28)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;border:1.5px solid var(--gold);color:var(--bronze)}
+nav{position:sticky;top:0;z-index:10;background:rgba(22,18,15,.95);backdrop-filter:blur(8px);display:flex;justify-content:space-between;align-items:center;padding:.4rem 5vw;border-bottom:1px solid rgba(201,173,122,.25)}
+.logo{color:var(--gold2);font-size:1.25rem;letter-spacing:.14em;text-decoration:none;display:flex;align-items:baseline;gap:.6rem}
+.logo small{font:500 .55rem Manrope;letter-spacing:.35em;color:var(--gold);opacity:.85}
+nav .links{display:flex;gap:1.4rem;align-items:center;font-size:.9rem}
+nav a:not(.btn):not(.logo){color:var(--ivory);text-decoration:none;transition:color .2s}
+nav a:not(.btn):not(.logo):hover{color:var(--gold2)}
+nav .btn{padding:.35em 1.1em;font-size:.85rem}
+.lang{display:inline-flex;align-items:center;gap:.35rem;background:transparent;border:1px solid rgba(201,173,122,.5);color:var(--gold2);border-radius:999px;padding:.25em .75em;font:500 .8rem Manrope,sans-serif;cursor:pointer;transition:all .25s}
+.lang:hover{background:rgba(201,173,122,.18)}
+.lang svg{width:16px;height:16px}
+.hero{min-height:72vh;display:flex;align-items:center;padding:4rem 5vw;background:linear-gradient(90deg,rgba(251,247,240,.94) 25%,rgba(251,247,240,.35) 65%,rgba(251,247,240,0)),url(hero.png) center/cover}
+html[dir=rtl] .hero{background:linear-gradient(270deg,rgba(251,247,240,.94) 25%,rgba(251,247,240,.35) 65%,rgba(251,247,240,0)),url(hero.png) center/cover}
+.hero h1{font-size:clamp(2rem,4.6vw,3.6rem);line-height:1.18;max-width:14em;color:var(--black);letter-spacing:-.01em;animation:rise 1s both}
+.hero p{margin:1.1rem 0 1.8rem;max-width:30em;font-size:1.05rem;color:#4d3f30;animation:rise 1s .2s both}
+.hero .btn{animation:rise 1s .4s both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+section{padding:4.2rem 5vw}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);text-align:center;color:var(--black)}
+.sub{text-align:center;color:var(--bronze);margin:.4rem 0 2rem}
+.chips{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.4rem}
+.chip{border:1.5px solid var(--gold);background:transparent;color:var(--bronze);border-radius:999px;padding:.45em 1.3em;font:500 .92rem Manrope;cursor:pointer;transition:all .25s}
+.chip.on,.chip:hover{background:var(--black);color:var(--gold2);border-color:var(--black)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.6rem;max-width:1250px;margin:auto}
+.card{background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(201,173,122,.4);transition:transform .35s,box-shadow .35s;animation:pop .6s both}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(120,95,55,.15)}
+@keyframes pop{from{opacity:0;transform:scale(.96)}}
+.card .ph{aspect-ratio:1;background:var(--ivory);overflow:hidden;position:relative}
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.card:hover img{transform:scale(1.05)}
+.tag{position:absolute;top:12px;inset-inline-start:12px;background:var(--blush);color:var(--black);border-radius:999px;padding:.15em .8em;font-size:.8rem}
+.sz{position:absolute;inset-inline-end:12px;bottom:12px;background:var(--black);color:var(--gold2);border-radius:999px;padding:.15em .8em;font-size:.8rem}
+.card .b{padding:1.1rem 1.2rem 1.3rem}
+.card h3{font-size:1.25rem;line-height:1.25}
+.card .d{font-size:.9rem;color:#6b5a45;margin:.3rem 0 .8rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .row{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+.price{font:600 1.15rem 'Playfair Display',serif;color:var(--bronze)}
+.card{position:relative}.card .cl{position:absolute;inset:0;z-index:1}.card .btn{position:relative;z-index:2;padding:.5em 1.15em;font-size:.88rem}
+.empty{text-align:center;color:var(--bronze);grid-column:1/-1}
+.about{background:var(--ivory);text-align:center}
+.about p{max-width:38em;margin:1rem auto 0;color:#4d3f30}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;max-width:1000px;margin:0 auto}
+.cc{background:#fff;border:1px solid rgba(201,173,122,.4);border-radius:20px;padding:1.4rem;text-align:center;text-decoration:none;color:var(--ink);transition:transform .3s,box-shadow .3s;display:block}
+a.cc:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(120,95,55,.14)}
+.cc .ic{width:46px;height:46px;border-radius:50%;background:var(--ivory);color:var(--bronze);display:grid;place-items:center;margin:0 auto .7rem}
+.cc .ic svg{width:22px;height:22px}
+.cc b{display:block;font-weight:600;margin-bottom:.15rem}
+.cc span{font-size:.92rem;color:#6b5a45;word-break:break-word}
+.follow{text-align:center;margin-top:2.2rem}
+.follow p{color:var(--bronze);margin-bottom:.8rem}
+.socs{display:flex;gap:.9rem;justify-content:center}
+.socs a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--gold);color:var(--bronze);transition:all .25s}
+.socs a:hover{background:var(--black);border-color:var(--black);color:var(--gold2);transform:translateY(-3px)}
+.socs svg{width:22px;height:22px}
+footer{background:var(--black);color:var(--ivory);text-align:center;padding:2rem 5vw 1.6rem}
+footer .logo{justify-content:center;font-size:1.3rem;margin-bottom:.9rem}
+footer .socs a{width:40px;height:40px;color:var(--gold2);border-color:rgba(201,173,122,.5)}
+footer .socs a:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+footer .fl{display:flex;gap:1.4rem;justify-content:center;margin:1.1rem 0 .6rem;font-size:.9rem}
+footer .fl a{color:var(--ivory);text-decoration:none;opacity:.85}
+footer .fl a:hover{color:var(--gold2)}
+footer p{opacity:.7;font-size:.85rem}
+.ov{position:fixed;inset:0;background:rgba(22,18,15,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:1rem;z-index:30}
+.ov.on{display:flex;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.modal{background:var(--bg);border-radius:26px;max-width:420px;width:100%;padding:1.5rem;border:1px solid var(--gold);animation:rise .35s both;max-height:92vh;overflow:auto}
+.modal h3{font-size:1.7rem;line-height:1.15}
+.modal .pn{color:var(--bronze);margin-bottom:.4rem}
+.modal label{display:block;font-size:.85rem;color:var(--bronze);margin:.7rem 0 .2rem}
+.modal input,.modal select{width:100%;border:1.5px solid #e4d6b6;border-radius:14px;padding:.7em 1em;font:inherit;background:#fff;transition:border .2s,box-shadow .2s}
+.modal input:focus,.modal select:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,173,122,.28)}
+.tot{display:flex;justify-content:space-between;margin:1rem 0 .4rem;font:600 1.3rem 'Playfair Display',serif}
+.err{color:#b3261e;font-size:.9rem;min-height:1.3em}
+.modal .acts{display:flex;gap:.6rem;flex-wrap:wrap}
+.modal .btn{flex:1;text-align:center}
+@media(max-width:640px){nav .links a:not(.btn){display:none}nav .links{gap:.6rem}.grid{grid-template-columns:repeat(2,1fr);gap:.9rem}.card .row{flex-direction:column;align-items:flex-start}.card .b{padding:.8rem}.card h3{font-size:1.05rem}section{padding:3rem 4vw}.hero{min-height:62vh;padding:3rem 5vw;background-image:linear-gradient(180deg,rgba(251,247,240,.9),rgba(251,247,240,.55)),url(hero.png)}html[dir=rtl] .hero{background-image:linear-gradient(180deg,rgba(251,247,240,.9),rgba(251,247,240,.55)),url(hero.png)}}
+@keyframes pan{from{background-position:0 0,0% center}to{background-position:0 0,100% center}}
+@media(max-width:640px){.hero{background-size:auto,cover;background-position:0 0,0% center;animation:pan 28s ease-in-out infinite alternate}html[dir=rtl] .hero{background-position:0 0,0% center}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#">YAQUINE<small>BOUTIQUE</small></a>
+  <div class="links"><a href="#shop" data-i="n_shop"></a><a href="#about" data-i="n_about"></a><a href="#contact" data-i="n_contact"></a>
+    <button class="lang" id="lang" aria-label="Langue / اللغة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 4 6 4 9.5s-1.4 6.8-4 9.5c-2.6-2.7-4-6-4-9.5s1.4-6.8 4-9.5z"/></svg><span id="lang-t">العربية</span></button>
+    <a class="btn" id="wa-nav" href="#">WhatsApp</a></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1 data-i="h_title"></h1>
+    <p data-i="h_text"></p>
+    <a class="btn" href="#shop" data-i="h_btn"></a>
+  </div>
+</header>
+
+<section id="shop">
+  <h2 data-i="s_title"></h2>
+  <p class="sub" data-i="s_sub"></p>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="about" id="about">
+  <h2 data-i="a_title"></h2>
+  <p data-i="a_text"></p>
+</section>
+
+<section id="contact">
+  <h2 data-i="c_title"></h2>
+  <p class="sub" data-i="c_sub"></p>
+  <div class="cgrid" id="cgrid"></div>
+  <div class="follow"><p data-i="c_follow"></p><div class="socs" id="soc"></div></div>
+</section>
+
+<footer>
+  <div class="logo">YAQUINE<small>BOUTIQUE</small></div>
+  <div class="fl"><a href="#shop" data-i="n_shop"></a><a href="#about" data-i="n_about"></a><a href="#contact" data-i="n_contact"></a></div>
+  <p>© <span id="y"></span> <span data-i="f_copy"></span></p>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+/* Default contact info (the admin Settings page overrides these when filled in) */
+const DEF={facebook:'https://www.facebook.com/profile.php?id=61596047857959',instagram:'https://www.instagram.com/boutique_yaquine',email:'Benhebbameda@gmail.com'};
+let products=[],cat='Tous',S={},cur=null,qty=1,lang='fr';
+try{lang=localStorage.lang==='ar'?'ar':'fr'}catch(e){}
+const T={
+fr:{n_shop:'Parfums',n_about:'À propos',n_contact:'Contact',h_title:'Découvrez votre univers de parfums',h_text:'Plus qu\'un parfum… une expérience. Box découverte, coffrets cadeaux et parfums homme & femme, livrés partout en Algérie.',h_btn:'Voir la collection',s_title:'Notre collection',s_sub:'Choisissez, puis commandez en un message.',a_title:'Boutique Yaquine',a_text:'Des fragrances choisies avec soin, présentées avec élégance. Offrez-vous un parfum, ou offrez un coffret : chaque commande est préparée avec attention et livrée jusqu\'à chez vous.',c_title:'Contactez-nous',c_sub:'Une question, une commande ? Écrivez-nous, nous répondons vite.',c_follow:'Suivez-nous',f_copy:'Boutique Yaquine · Livraison partout en Algérie',
+ Tous:'Tous',Homme:'Homme',Femme:'Femme',Coffrets:'Coffrets',sold:'Épuisé',order:'Commander',none:'Aucun produit pour le moment.',
+ k_phone:'Téléphone',k_wa:'WhatsApp',k_mail:'Email',k_addr:'Adresse',k_hours:'Horaires',wa_hi:'Écrivez-nous',
+ m_title:'Commander',m_name:'Nom complet',m_phone:'Téléphone',m_wil:'Wilaya',m_qty:'Quantité',m_tot:'Total',m_close:'Fermer',m_ok:'Confirmer la commande',m_send:'Envoi…',m_thx:'Merci !',m_thx2:'Votre commande est enregistrée. Nous vous appelons très vite pour la confirmer.',m_wa:'Écrire sur WhatsApp',cur:'DA',other:'العربية'},
+ar:{n_shop:'العطور',n_about:'من نحن',n_contact:'اتصل بنا',h_title:'اكتشف عالمك من العطور',h_text:'أكثر من مجرد عطر… إنها تجربة. بوكس اكتشاف، علب هدايا وعطور رجالية ونسائية، نوصلها إلى كل ولايات الجزائر.',h_btn:'اكتشف المجموعة',s_title:'مجموعتنا',s_sub:'اختر عطرك ثم اطلبه برسالة واحدة.',a_title:'بوتيك يقين',a_text:'عطور مختارة بعناية وتُقدَّم بأناقة. أهدِ نفسك عطرًا أو أهدِ علبة هدايا: كل طلب يُحضَّر باهتمام ويصلك حتى باب بيتك.',c_title:'اتصل بنا',c_sub:'لديك سؤال أو طلب؟ راسلنا وسنرد عليك بسرعة.',c_follow:'تابعنا',f_copy:'بوتيك يقين · توصيل إلى كل ولايات الجزائر',
+ Tous:'الكل',Homme:'رجالي',Femme:'نسائي',Coffrets:'علب هدايا',sold:'نفد المخزون',order:'اطلب الآن',none:'لا توجد منتجات حاليًا.',
+ k_phone:'الهاتف',k_wa:'واتساب',k_mail:'البريد الإلكتروني',k_addr:'العنوان',k_hours:'ساعات العمل',wa_hi:'راسلنا الآن',
+ m_title:'طلب الشراء',m_name:'الاسم الكامل',m_phone:'رقم الهاتف',m_wil:'الولاية',m_qty:'الكمية',m_tot:'المجموع',m_close:'إغلاق',m_ok:'تأكيد الطلب',m_send:'جارٍ الإرسال…',m_thx:'شكرًا لك!',m_thx2:'تم تسجيل طلبك. سنتصل بك قريبًا لتأكيده.',m_wa:'راسلنا على واتساب',cur:'دج',other:'Français'}
+};
+const t=k=>T[lang][k]??k;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DA=n=>Number(n).toLocaleString('fr-DZ')+' '+t('cur');
+const slug=n=>String(n).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
+const purl=p=>'/p/'+(slug(p.name)?slug(p.name)+'-':'')+p.id;
+const wa=x=>`https://wa.me/${S.whatsapp}?text=${encodeURIComponent(x)}`;
+const ev=(fb,tt,d)=>{try{window.fbq&&fbq('track',fb,d);window.ttq&&ttq.track(tt,d)}catch(e){}};
+$('#y').textContent=new Date().getFullYear();
+const IC={
+ fb:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.95.45-1.7 1.8-1.7h1.6V3.8c-.3 0-1.3-.15-2.4-.15-2.5 0-4.1 1.5-4.1 4.2v2.65H7.7v3.3h2.7V22z"/></svg>',
+ ig:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>',
+ tt:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.3 2.4 1.7 3.9 4 4.1v3.1c-1.5.1-2.9-.4-4-1.1v6.1c0 5.2-5.6 6.8-8.4 3.5-2-2.4-1.3-6.6 2.2-7.5.7-.2 1.4-.2 2-.1v3.2c-.8-.3-1.7-.2-2.2.4-.7.8-.2 2.2.9 2.5 1.2.3 2.3-.5 2.3-1.8V3z"/></svg>',
+ yt:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg>',
+ ph:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
+ wa:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.6-4.7A8.5 8.5 0 1 1 8 19.5z"/><path d="M9 9c0 3 3 6 6 6l1-1.6-2-1-.8.8c-.8-.4-1.8-1.4-2.2-2.2l.8-.8-1-2z"/></svg>',
+ ml:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>',
+ pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+ clk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
+};
+function pixels(){
+  if(S.fb_pixel){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',S.fb_pixel);fbq('track','PageView')}
+  if(S.tiktok_pixel){!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};ttq.load(S.tiktok_pixel);ttq.page()}(window,document,'ttq')}
+}
+function track(){let v;try{v=localStorage.vid||(localStorage.vid=crypto.randomUUID())}catch(e){v=crypto.randomUUID()}
+  fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({vid:v}),keepalive:true}).catch(()=>{})}
+function link(k){return S[k]||DEF[k]||''}
+function contact(){
+  const cards=[],ph=S.phone,em=S.email||DEF.email;
+  if(S.whatsapp)cards.push(`<a class="cc" target="_blank" rel="noopener noreferrer" href="${wa('Bonjour, je voudrais des informations.')}"><div class="ic">${IC.wa}</div><b>${t('k_wa')}</b><span>${t('wa_hi')}</span></a>`);
+  if(ph)cards.push(`<a class="cc" href="tel:${esc(ph.replace(/[^\d+]/g,''))}"><div class="ic">${IC.ph}</div><b>${t('k_phone')}</b><span dir="ltr">${esc(ph)}</span></a>`);
+  if(em)cards.push(`<a class="cc" href="mailto:${esc(em)}"><div class="ic">${IC.ml}</div><b>${t('k_mail')}</b><span>${esc(em)}</span></a>`);
+  if(S.address)cards.push(`<div class="cc"><div class="ic">${IC.pin}</div><b>${t('k_addr')}</b><span>${esc(S.address)}</span></div>`);
+  if(S.hours)cards.push(`<div class="cc"><div class="ic">${IC.clk}</div><b>${t('k_hours')}</b><span>${esc(S.hours)}</span></div>`);
+  $('#cgrid').innerHTML=cards.join('');
+  const soc=[['instagram','Instagram',IC.ig],['facebook','Facebook',IC.fb],['tiktok','TikTok',IC.tt],['youtube','YouTube',IC.yt]].filter(x=>link(x[0])).map(x=>`<a href="${esc(link(x[0]))}" target="_blank" rel="noopener noreferrer" aria-label="${x[1]}" title="${x[1]}">${x[2]}</a>`).join('');
+  $('#soc').innerHTML=soc;
+  const n=$('#wa-nav');if(S.whatsapp){n.href=wa('Bonjour, je voudrais des informations.');n.target='_blank';n.rel='noopener'}else n.style.display='none';
+}
+function render(){
+  $('#chips').innerHTML=['Tous','Homme','Femme','Coffrets'].map(c=>`<button class="chip ${c===cat?'on':''}" data-c="${c}">${t(c)}</button>`).join('');
+  const list=products.filter(p=>cat==='Tous'||p.category===cat);
+  $('#grid').innerHTML=list.length?list.map((p,i)=>`
+   <article class="card" style="animation-delay:${Math.min(i,8)*60}ms">
+    <a class="cl" href="${purl(p)}" aria-label="${esc(p.name)}"></a>
+    <div class="ph"><img src="/uploads/${p.image}" alt="${esc(p.name)}" loading="lazy" width="1200" height="1200">${p.soldOut?`<span class="tag">${t('sold')}</span>`:''}${p.size?`<span class="sz">${esc(p.size)}</span>`:''}</div>
+    <div class="b"><h3>${esc(p.name)}</h3><p class="d">${esc(p.description)}</p>
+    <div class="row"><span class="price">${DA(p.price)}</span>${p.soldOut?'':`<a class="btn" href="${purl(p)}#order">${t('order')}</a>`}</div></div>
+   </article>`).join(''):`<p class="empty">${t('none')}</p>`;
+}
+function applyLang(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+  $('#lang-t').textContent=t('other');
+  document.title=lang==='ar'?'بوتيك يقين — عطور':'Boutique Yaquine — Parfums';
+  render();contact();
+}
+$('#lang').onclick=()=>{lang=lang==='fr'?'ar':'fr';try{localStorage.lang=lang}catch(e){}applyLang()};
+$('#chips').onclick=e=>{const c=e.target.dataset.c;if(c){cat=c;render()}};
+
+applyLang();
+Promise.all([fetch('/api/settings').then(r=>r.json()),fetch('/api/products').then(r=>r.json())]).then(([st,p])=>{S=st;products=p;pixels();applyLang()});
+track();
+</script>
+</body>
+</html>
