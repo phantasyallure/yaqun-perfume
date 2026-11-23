@@ -1,0 +1,16 @@
+name = "yaqine"
+pages_build_output_dir = "public"
+compatibility_date = "2024-11-01"
+
+[vars]
+TELEGRAM_CHAT_ID = ""   # your Telegram chat ID (several allowed, separated by commas)
+WHATSAPP = "213784371031"   # your WhatsApp number, no + sign
+
+[[d1_databases]]
+binding = "DB"
+database_name = "yaqine-db"
+database_id = "f13cf493-c0dd-4ef6-bdda-a8d765b736ba"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "yaqine-images"
