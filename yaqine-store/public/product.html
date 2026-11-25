@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!--HEAD-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--black:#16120F;--gold:#C9AD7A;--gold2:#E6D5AE;--bronze:#8A6D3F;--ivory:#F3EBDC;--blush:#E9B8B0;--ink:#2A221B;--bg:#FBF7F0}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;min-height:100dvh}
+h1,h2,.logo{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+html[lang=ar] body,html[lang=ar] h1,html[lang=ar] h2,html[lang=ar] .logo,html[lang=ar] .price,html[lang=ar] .tot,html[lang=ar] .btn,html[lang=ar] input,html[lang=ar] select,html[lang=ar] textarea{font-family:Cairo,system-ui,sans-serif}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:0;border-radius:999px;padding:.8em 1.6em;font:500 1rem Manrope,sans-serif;cursor:pointer;text-decoration:none;background:linear-gradient(135deg,#E3D2AA,#C9AD7A);color:#2A1F12;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(150,120,70,.28)}
+.btn:active{transform:scale(.97)}.btn:disabled{opacity:.6}
+.btn.ghost{background:transparent;border:1.5px solid var(--gold);color:var(--bronze)}
+nav{position:sticky;top:0;z-index:10;background:rgba(22,18,15,.95);backdrop-filter:blur(8px);display:flex;justify-content:space-between;align-items:center;padding:.5rem 5vw;border-bottom:1px solid rgba(201,173,122,.25)}
+.logo{color:var(--gold2);font-size:1.25rem;letter-spacing:.14em;text-decoration:none;display:flex;align-items:baseline;gap:.6rem}
+.logo small{font:500 .55rem Manrope;letter-spacing:.35em;color:var(--gold)}
+.nr{display:flex;gap:.8rem;align-items:center}
+.back{color:var(--ivory);text-decoration:none;font-size:.9rem}
+.lang{background:transparent;border:1px solid rgba(201,173,122,.5);color:var(--gold2);border-radius:999px;padding:.25em .85em;font:500 .8rem Manrope,sans-serif;cursor:pointer}
+.wrap{max-width:1050px;margin:0 auto;padding:1.5rem 5vw 3rem;display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;align-items:start}
+.pic{position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(201,173,122,.4);background:var(--ivory);aspect-ratio:1}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.tag{position:absolute;top:14px;inset-inline-start:14px;background:var(--blush);color:var(--black);border-radius:999px;padding:.2em .9em;font-size:.85rem}
+.cat{color:var(--bronze);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15;color:var(--black);margin:.2rem 0 .5rem}
+.meta{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+.price{font:600 1.6rem 'Playfair Display',serif;color:var(--bronze)}
+.sz{background:var(--black);color:var(--gold2);border-radius:999px;padding:.15em .85em;font-size:.85rem}
+.desc{color:#4d3f30;white-space:pre-line;margin-bottom:1.6rem}
+.form{background:#fff;border:1px solid rgba(201,173,122,.45);border-radius:22px;padding:1.3rem;scroll-margin-top:5rem}
+.form h2{font-size:1.5rem;margin-bottom:.2rem}
+.form label{display:block;font-size:.85rem;color:var(--bronze);margin:.8rem 0 .25rem}
+.dt{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#f3ead8;padding:4px;border-radius:14px;margin:.3rem 0 .6rem}
+.dt button{border:0;background:none;border-radius:11px;padding:.65em .3em;font:500 .92rem inherit;font-family:inherit;color:#8a7551;cursor:pointer;transition:background .25s,color .25s}
+.dt button.on{background:#16120F;color:#E6D5AE}
+.dt button:disabled{opacity:.4;cursor:default}
+.dl{display:flex;justify-content:space-between;color:#8a7551;font-size:.95rem;padding:.2rem 0}
+.form input,.form select,.form textarea{resize:vertical;min-height:0}
+.form input,.form select,.form textarea{width:100%;border:1.5px solid #e4d6b6;border-radius:14px;padding:.75em 1em;font:inherit;font-size:1rem;background:#fff}
+.form input:focus,.form select:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,173,122,.28)}
+.tot{display:flex;justify-content:space-between;margin:1.1rem 0 .3rem;font:600 1.3rem 'Playfair Display',serif}
+.err{color:#b3261e;font-size:.9rem;min-height:1.3em}
+.form .btn{width:100%;margin-top:.4rem}
+.ok{text-align:center;padding:.6rem 0}.ok p{color:var(--bronze);margin:.4rem 0 1rem}
+.ok .btn{margin-top:.5rem}
+footer{background:var(--black);color:var(--ivory);text-align:center;padding:1.4rem 5vw;font-size:.85rem;opacity:.95}
+@media(max-width:760px){.wrap{grid-template-columns:1fr;gap:1.2rem;padding-top:1rem}.pic{border-radius:20px}}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="/">YAQUINE<small>BOUTIQUE</small></a>
+<div class="nr"><a class="back" href="/#shop" id="back"></a><button class="lang" id="lang"></button></div></nav>
+<main class="wrap">
+  <div class="pic" id="pic"></div>
+  <div>
+    <div class="cat" id="cat"></div>
+    <h1 id="name"></h1>
+    <div class="meta"><span class="price" id="price"></span><span class="sz" id="size"></span></div>
+    <p class="desc" id="desc"></p>
+    <div class="form" id="order"></div>
+  </div>
+</main>
+<footer>© <span id="y"></span> Boutique Yaquine</footer>
+<script src="/wilayas.js"></script>
+<script>
+const $=s=>document.querySelector(s),P=window.__P;
+let lang='fr',qty=1,S={};
+try{lang=localStorage.lang==='ar'?'ar':'fr'}catch(e){}
+const T={
+fr:{back:'← Boutique',Homme:'Homme',Femme:'Femme',Coffrets:'Coffrets',sold:'Épuisé',m_title:'Commander',m_name:'Nom complet',m_phone:'Téléphone',m_wil:'Wilaya',m_pick:'Choisir votre wilaya',m_com:'Commune',m_compick:'Choisir la commune',m_deliv:'Livraison',m_home:'À domicile',m_office:'Au bureau',m_dtype:'Mode de livraison',m_free:'Gratuite',m_sub:'Sous-total',m_note:'Commentaire (facultatif)',m_note_ph:'Adresse, remarque, heure de livraison…',m_qty:'Quantité',m_tot:'Total',m_ok:'Confirmer la commande',m_send:'Envoi…',m_thx:'Merci !',m_thx2:'Votre commande est enregistrée. Nous vous appelons très vite pour la confirmer.',m_wa:'Écrire sur WhatsApp',m_more:'Voir d\'autres parfums',unavail:'Ce produit est actuellement épuisé.',cur:'DA',other:'العربية'},
+ar:{back:'المتجر ←',Homme:'رجالي',Femme:'نسائي',Coffrets:'علب هدايا',sold:'نفد المخزون',m_title:'طلب الشراء',m_name:'الاسم الكامل',m_phone:'رقم الهاتف',m_wil:'الولاية',m_pick:'اختر ولايتك',m_com:'البلدية',m_compick:'اختر البلدية',m_deliv:'التوصيل',m_home:'إلى المنزل',m_office:'إلى المكتب',m_dtype:'طريقة التوصيل',m_free:'مجاني',m_sub:'المجموع الفرعي',m_note:'تعليق (اختياري)',m_note_ph:'العنوان، ملاحظة، وقت التوصيل…',m_qty:'الكمية',m_tot:'المجموع',m_ok:'تأكيد الطلب',m_send:'جارٍ الإرسال…',m_thx:'شكرًا لك!',m_thx2:'تم تسجيل طلبك. سنتصل بك قريبًا لتأكيده.',m_wa:'راسلنا على واتساب',m_more:'اكتشف عطورًا أخرى',unavail:'هذا المنتج غير متوفر حاليًا.',cur:'دج',other:'Français'}};
+const t=k=>T[lang][k]??k;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DA=n=>Number(n).toLocaleString('fr-DZ')+' '+t('cur');
+const wa=x=>`https://wa.me/${S.whatsapp}?text=${encodeURIComponent(x)}`;
+const ev=(fb,tt,d)=>{try{window.fbq&&fbq('track',fb,d);window.ttq&&ttq.track(tt,d)}catch(e){}};
+$('#y').textContent=new Date().getFullYear();
+function draw(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  $('#back').textContent=t('back');$('#lang').textContent=t('other');
+  $('#pic').innerHTML=`<img src="/uploads/${esc(P.image)}" alt="${esc(P.name)}" width="1200" height="1200">${P.soldOut?`<span class="tag">${t('sold')}</span>`:''}`;
+  $('#cat').textContent=t(P.category);$('#name').textContent=P.name;$('#price').textContent=DA(P.price);
+  $('#size').textContent=P.size||'';$('#size').style.display=P.size?'':'none';$('#desc').textContent=P.description||'';
+  form();
+}
+
+/* ---- delivery price + communes ---- */
+let COM=null;   // {wilayaCode:[{fr,ar}]} loaded once from a public dataset; falls back to a typed field
+function loadCommunes(){if(COM!==null)return;COM={};
+  fetch('https://cdn.jsdelivr.net/npm/geoalgeria@2.4.0/data/ecommerce/communes.json').then(r=>r.json()).then(d=>{
+    const arr=Array.isArray(d)?d:Object.values(d).flat();const g=(o,ks)=>{for(const k of ks)if(o[k]!=null&&o[k]!=='')return o[k]};
+    arr.forEach(o=>{const w=parseInt(g(o,['wilaya_code','wilaya_id','wilayaCode','wilaya']));const fr=g(o,['commune_name_fr','name_fr','name','commune_name']);if(!w||!fr)return;(COM[w]=COM[w]||[]).push({fr:String(fr),ar:String(g(o,['commune_name_ar','name_ar'])||fr)})});
+    Object.values(COM).forEach(l=>l.sort((a,b)=>a.fr.localeCompare(b.fr)));
+    if($('#o-w')&&$('#o-mw')){communeBox($('#o-m')?$('#o-m').value:'')}}).catch(()=>{})}
+function communeBox(sel){const box=$('#o-mw');if(!box)return;const w=parseInt($('#o-w').value);if(!w){box.innerHTML='';return}
+  const l=COM&&COM[w];
+  box.innerHTML=`<label for="o-m">${t('m_com')}</label>`+(l&&l.length?`<select id="o-m"><option value="">${t('m_compick')}</option>${l.map(c=>`<option value="${esc(c.fr)}"${c.fr===sel?' selected':''}>${esc(lang==='ar'?c.ar:c.fr)}</option>`).join('')}</select>`:`<input id="o-m" maxlength="60" autocomplete="address-level2" value="${esc(sel)}">`)}
+let dtype='home';
+function dEntry(){const w=parseInt($('#o-w')&&$('#o-w').value);if(!w)return null;let d={};try{d=JSON.parse(S.delivery||'{}')}catch(e){}const e=d[w];if(e==null)return null;return typeof e==='object'?e:{h:e,o:e}}
+function delivery(){const e=dEntry();if(!e)return null;const v=e[dtype==='office'?'o':'h'];return v==null?null:+v}
+function upd(){const e=dEntry(),sub=P.price*qty;
+  if(e&&(e.h==null||e.o==null))dtype=e.h!=null?'home':'office';
+  const d=delivery();
+  $('#o-dt').innerHTML=e?`<div class="dt"><button type="button" data-d="home" class="${dtype==='home'?'on':''}"${e.h==null?' disabled':''}>${t('m_home')}</button><button type="button" data-d="office" class="${dtype==='office'?'on':''}"${e.o==null?' disabled':''}>${t('m_office')}</button></div>`:'';
+  $('#o-dl').innerHTML=d==null?'':`<div class="dl"><span>${t('m_deliv')}</span><span>${d?DA(d):t('m_free')}</span></div>`;
+  $('#o-t').textContent=DA(sub+(d||0))}
+function form(){
+  const v=k=>$('#'+k)?$('#'+k).value:'';const nm=v('o-n'),ph=v('o-p'),wl=v('o-w'),nt=v('o-c'),cm=v('o-m');
+  if(P.soldOut){$('#order').innerHTML=`<p class="err" style="color:var(--bronze)">${t('unavail')}</p><a class="btn ghost" href="/#shop">${t('m_more')}</a>`;return}
+  $('#order').innerHTML=`<h2>${t('m_title')}</h2>
+  <label for="o-n">${t('m_name')}</label><input id="o-n" autocomplete="name" maxlength="60" value="${esc(nm)}">
+  <label for="o-p">${t('m_phone')}</label><input id="o-p" type="tel" dir="ltr" autocomplete="tel" inputmode="tel" maxlength="16" value="${esc(ph)}">
+  <label for="o-w">${t('m_wil')}</label><select id="o-w" autocomplete="address-level1"><option value="">${t('m_pick')}</option>${wilayaOptions(lang,wl)}</select>
+  <div id="o-mw"></div>
+  <label for="o-c">${t('m_note')}</label><textarea id="o-c" rows="3" maxlength="300" placeholder="${esc(t('m_note_ph'))}">${esc(nt)}</textarea>
+  <label for="o-q">${t('m_qty')}</label><select id="o-q">${[1,2,3,4,5].map(n=>`<option ${n===qty?'selected':''}>${n}</option>`).join('')}</select>
+  <div id="o-dt"></div>
+  <div id="o-dl"></div>
+  <div class="tot"><span>${t('m_tot')}</span><span id="o-t">${DA(P.price*qty)}</span></div><p class="err" id="o-e"></p>
+  <button class="btn" id="o-s">${t('m_ok')}</button>`;
+  $('#o-dt').onclick=e=>{const b=e.target.closest('[data-d]');if(!b||b.disabled)return;dtype=b.dataset.d;upd()};
+  $('#o-q').onchange=e=>{qty=+e.target.value;upd()};
+  $('#o-w').onchange=()=>{communeBox('');upd()};communeBox(cm);upd();
+  $('#o-s').onclick=submit;
+}
+// keep the focused field visible above the phone keyboard
+document.addEventListener('focusin',e=>{if(e.target.matches('input,select,textarea'))setTimeout(()=>e.target.scrollIntoView({block:'center',behavior:'smooth'}),300)});
+$('#lang').onclick=()=>{lang=lang==='fr'?'ar':'fr';try{localStorage.lang=lang}catch(e){}draw()};
+async function submit(){const b=$('#o-s');b.disabled=true;b.textContent=t('m_send');
+  try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({productId:P.id,qty,name:$('#o-n').value,phone:$('#o-p').value,wilaya:$('#o-w').value,note:$('#o-c').value,commune:$('#o-m')?$('#o-m').value:'',dtype})});
+    const j=await r.json();if(!r.ok)throw new Error(j.error||'Erreur');
+    ev('Purchase','PlaceAnOrder',{value:j.total,currency:'DZD'});
+    const msg=`Bonjour, je viens de commander : ${P.name}${P.size?' ('+P.size+')':''} × ${qty} — ${Number(j.total).toLocaleString('fr-DZ')} DA. Nom : ${$('#o-n').value}`;
+    $('#order').innerHTML=`<div class="ok"><h2>${t('m_thx')}</h2><p>${t('m_thx2')}</p>${S.whatsapp?`<a class="btn" target="_blank" rel="noopener" href="${wa(msg)}">${t('m_wa')}</a>`:''}<a class="btn ghost" href="/#shop">${t('m_more')}</a></div>`}
+  catch(e){$('#o-e').textContent=e.message;b.disabled=false;b.textContent=t('m_ok')}}
+function pixels(){
+  if(S.fb_pixel){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',S.fb_pixel);fbq('track','PageView')}
+  if(S.tiktok_pixel){!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};ttq.load(S.tiktok_pixel);ttq.page()}(window,document,'ttq')}
+}
+function track(){let v;try{v=localStorage.vid||(localStorage.vid=crypto.randomUUID())}catch(e){v=crypto.randomUUID()}
+  fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({vid:v}),keepalive:true}).catch(()=>{})}
+if(P){loadCommunes();draw();track();fetch('/api/settings').then(r=>r.json()).then(s=>{S=s;if($('#o-dl'))upd();pixels();ev('ViewContent','ViewContent',{content_name:P.name,value:P.price,currency:'DZD'})})}
+</script>
+</body>
+</html>
